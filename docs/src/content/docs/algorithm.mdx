@@ -1,6 +1,8 @@
 ---
-label: Algorithm Overview
-icon: git-compare
+title: Algorithm Overview
+sidebar:
+  order: 1
+  label: The algorithm
 ---
 
 # The simulation process
@@ -101,7 +103,7 @@ parallelizes over multiple samples. It does so by using the variant information 
 ```python
 # pseudo-code
 samples = get_samples(vcf)
-for sample in samples:     <- parallelized
+for sample in samples: # [!annotate] parallelized
     schemas = []
     variants = get_variants(sample, vcf)
     for hap in 1:ploidy(variants):

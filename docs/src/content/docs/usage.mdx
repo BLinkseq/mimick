@@ -1,13 +1,15 @@
 ---
-label: Using Mimick
-icon: terminal
-order: 98
+title: Usage
+sidebar:
+  order: 1
+  label: Usage
 ---
 
-```bash usage
-mimick options... FASTA1 FAST2...
+Mimick has two modes of operation:
+```bash
+mimick options... FASTA1 FAST2... # [!annotate] simulate one sample
 
-mimick options... --vcf FASTA
+mimick options... --vcf FASTA # [!annotate] simulate many samples
 ```
 Use `--help` or `-h` or call `mimick` without arguments to call up the docstring.
 
@@ -27,16 +29,15 @@ done
 ```
 
 
-==- All Options
+## All Options
 For completeness, the table below is all the command line arguments and options
 
-{.compact .clean}
-| short name  {.whitespace-nowrap} | long name     {.whitespace-nowrap} |          default           {.whitespace-nowrap}          | description                                                                                                                                    | notes                                                |
+| short name   | long name      |          default                     | description                                                                                                                                    | notes                                                |
 | :------------------------------: | :--------------------------------- | :------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------- |
 |                                  | `FASTA`                            |                                                          | input fasta file(s)                                                                                                                            | REQUIRED                                             |
 |               `-c`               | `--circular`                       |                                                          | toggle to let Mimick know the input contigs are circular/prokaryotic                                                                           |                                                      |
 |               `-o`               | `--output-prefix`                  |                       `simulated/`                       | output file prefix                                                                                                                             |                                                      |
-|               `-f`               | `--format`                         | [varies](./data_formats.md#linked-read-simulation-types) | output format of FASTQ files                                                                                                                   |                                                      |
+|               `-f`               | `--format`                         | [varies](../data_formats#linked-read-simulation-types) | output format of FASTQ files                                                                                                                   |                                                      |
 |               `-q`               | `--quiet`                          |                                                          | toggle to hide the progress bar                                                                                                                |                                                      |
 |               `-m`               | `--mask-n`                         |                                                          | toggle to replace `N` bases in FASTA file(s) with random ATCG bases                                                                            |                                                      |
 |               `-s`               | `--seed`                           |                                                          | random seed for simulation                                                                                                                     | optional and useful for reproducibility              |
@@ -44,15 +45,14 @@ For completeness, the table below is all the command line arguments and options
 |               `-g`               | `--genomic-coverage`               |                           `30`                           | mean coverage target for simulated data                                                                                                        |                                                      |
 |               `-i`               | `--insert-size`                    |                          `500`                           | outer distance between the two ends in bp                                                                                                      | must be >`--read-lengths`                            |
 |               `-d`               | `--insert-stdev`                   |                           `50`                           | standard deviation of --distance                                                                                                               |                                                      |
-|               `-A`               | `--molecule-attempts`              |                          `300`                           | number of attempts to create a molecule with <70% ambiguous bases before exiting with an error                                                 |                                                      |
-|               `-C`               | `--molecule-coverage`              |                          `0.2`                           | mean percent coverage per molecule if <1, else mean number of reads per molecule                                                               |                                                      |
+|               `-A`               | `--molecule-attempts`              |                          `300`                           | number of attempts to create a molecule with \<70% ambiguous bases before exiting with an error                                                 |                                                      |
+|               `-C`               | `--molecule-coverage`              |                          `0.2`                           | mean percent coverage per molecule if \<1, else mean number of reads per molecule                                                               |                                                      |
 |               `-L`               | `--molecule-length`                |                         `80000`                          | mean length of molecules in bp, drawn from exponential distribution                                                                            |                                                      |
 |               `-N`               | `--molecules-per`                  |                           `3`                            | mean number of unrelated molecules per barcode, drawn from an exponential distribution. If negative, (e.g. `-2`) will be fixed for that number |                                                      |
 |               `-l`               | `--read-lengths`                   |                        `150,150`                         | length of R1,R2 reads in bp                                                                                                                    | each must be >10 and separated by a comma, no spaces |
 |               `-S`               | `--singletons`                     |                           `0`                            | proportion of barcodes that will only have a single read pair                                                                                  |                                                      |
 |               `-v`               | `--vcf`                            |                                                          | VCF-formatted file containing genotypes from which to create per-sample haplotypes                                                             |                                                      |
 
-===
 
 ## Required Arguments
 Running Mimick will always require a barcode specification and at least one input FASTA file (B/Gzipped is okay).
@@ -64,8 +64,9 @@ There is no strict enforcement of the fasta files being from the same genome, it
 the simulator (but I'm open to being surprised). 
 
 ```bash fasta inputs
+# [!callout /hap1/] fasta 1
+# [!callout /hap2/] fasta 2
 mimick hap1.fasta hap2.fasta
-#      ^fasta 1   ^fasta 2
 ```
 ### Circular DNA
 The `--circular` toggle/flag tells Mimick to treat each contig
@@ -78,11 +79,10 @@ should make sense as well: $end = start + molecule\_size - contig\_size$
 
 
 ## Options
-+++ General options
+### General options
 These options control inputs/outputs and resources
 
-{.compact .clean}
-| short name  {.whitespace-nowrap} | long name     {.whitespace-nowrap} |          default           {.whitespace-nowrap}          | description                                                                        |
+| short name   | long name      |          default                     | description                                                                        |
 | :------------------------------: | :--------------------------------- | :------------------------------------------------------: | :--------------------------------------------------------------------------------- |
 |               `-c`               | `--circular`                       |                         `False`                          | toggle to let Mimick know the input contigs are circular/prokaryotic               |
 |               `-o`               | `--output-prefix`                  |                       `simulated/`                       | output file prefix                                                                 |
@@ -100,18 +100,15 @@ simulation type. See [Data Formats](data_formats.md) for more information.
 +++ Linked-read simulation
 These are the options available specific to linked-read parameters, such as the average molecule length, etc.
 
-{.compact .clean}
-| short name {.whitespace-nowrap} | long name   {.whitespace-nowrap} | default       {.whitespace-nowrap} | description                                                                                                                                    | notes                                                |
+| short name  | long name   | default        | description                                                                                                                                    | notes                                                |
 | :-----------------------------: | :------------------------------- | :--------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------- |
 |                                 | `FASTA`                          |                                    | input fasta file(s)                                                                                                                            | REQUIRED                                             |
 |              `-g`               | `--genomic-coverage`             |                `30`                | mean coverage target for simulated data                                                                                                        |                                                      |
 |              `-i`               | `--insert-size`                  |               `500`                | outer distance between the two ends in bp                                                                                                      | must be >`--read-lengths`                            |
 |              `-d`               | `--insert-stdev`                 |                `50`                | standard deviation of --distance                                                                                                               |                                                      |
-|              `-A`               | `--molecule-attempts`            |               `300`                | number of attempts to create a molecule with <70% ambiguous bases before exiting with an error                                                 |                                                      |
-|              `-C`               | `--molecule-coverage`            |               `0.2`                | mean percent coverage per molecule if <1, else mean number of reads per molecule                                                               |                                                      |
+|              `-A`               | `--molecule-attempts`            |               `300`                | number of attempts to create a molecule with \<70% ambiguous bases before exiting with an error                                                 |                                                      |
+|              `-C`               | `--molecule-coverage`            |               `0.2`                | mean percent coverage per molecule if \<1, else mean number of reads per molecule                                                               |                                                      |
 |              `-L`               | `--molecule-length`              |              `80000`               | mean length of molecules in bp, drawn from exponential distribution                                                                            |                                                      |
 |              `-N`               | `--molecules-per`                |                `3`                 | mean number of unrelated molecules per barcode, drawn from an exponential distribution. If negative, (e.g. `-2`) will be fixed for that number |                                                      |
 |              `-l`               | `--read-lengths`                 |             `150,150`              | length of R1,R2 reads in bp                                                                                                                    | each must be >10 and separated by a comma, no spaces |
 |              `-S`               | `--singletons`                   |                `0`                 | proportion of barcodes will only have a single read pair                                                                                       |                                                      |
-
-+++

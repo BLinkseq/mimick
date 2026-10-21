@@ -1,6 +1,8 @@
 ---
-label: Linked-Read Data Formats
-icon: file-binary
+title: Linked-Read Data Formats
+sidebar:
+  order: 1
+  label: Data formats
 ---
 
 Linked-read chemistries continue to evolve and it seems like every new method wants to use their own bespoke
@@ -17,8 +19,7 @@ with `--format stlfr` and `--read-lengths 150,108`. You can also mix-match these
 
 The table below serves as a guide for the configurations for the common linked-read varieties: 
 
-{.compact .clean}
-| Chemistry  {.whitespace-nowrap} | `--read-lengths`  {.whitespace-nowrap} | Format                                       | barcode `--format`    {.whitespace-nowrap} |
+| Chemistry   | `--read-lengths`  | Format                                       | barcode `--format`     |
 | :------------------------------ | :------------------------------------: | :------------------------------------------- | :----------------------------------------- |
 | 10x                             |               `134,150`                | single barcode on R1                         | `tellseq`                                  |
 | tellseq                         |               `132,150`                | single barcode on R1                         | `tellseq`                                  |
@@ -40,8 +41,7 @@ You can suffix `standard` with `:haplotagging` or `:stlfr` (e.g. `standard:stlfr
 with that kind of barcode encoding style, otherwise `standard` (no suffix) will use the nucleotide barcode.
 **We strongly recommend using the standard output format in your work**.
 
-{.compact .clean}
-| --format   {.whitespace-nowrap} | Barcode Location                         | Example                    |
+| --format    | Barcode Location                         | Example                    |
 | :------------------------------ | :--------------------------------------- | :------------------------- |
 | `10x`                           | start of R1 sequence                     | `ATAGACCATAGA`GGACA...     |
 | `haplotagging`                  | sequence header as `BX:Z:ACBD`           | `@SEQID BX:Z:A0C331B34D87` |
@@ -52,10 +52,10 @@ with that kind of barcode encoding style, otherwise `standard` (no suffix) will 
 ## Proper read pairing
 Mimick should properly pair reads, but in the event you need to do that manually, you can use `seqkit`:
 ```bash
-# if the forward/reverse specification is the /1 /2 format
+# [!ref] if the forward/reverse specification is the /1 /2 format
 seqkit pair --id-regexp '^(\S+)\/[12]' -1 sample_0${i}.R1.fq.gz -2 sample_0${i}.R2.fq.gz
 
-# if the forward/reverse specification is the modern 1:N:0:ATTACA format
+# [!ref] if the forward/reverse specification is the modern 1:N:0:ATTACA format
 seqkit pair -1 sample_0${i}.R1.fq.gz -2 sample_0${i}.R2.fq.gz
 ```
 You can optionally use the `-u` flag to ask `seqkit` to also save the unpaired reads.

@@ -1,0 +1,55 @@
+---
+title: Installing Mimick
+sidebar:
+  order: 1
+  label: Install
+---
+import { Badge } from '@astrojs/starlight/components';
+
+There are three ways you can install Mimick: conda, pixi, pip. Make note of the names of the code blocks, as they
+describe installation and usage variations.
+
+## Install with conda <Badge text="recommended" variant="tip" />
+To install Mimick using conda (or miniconda, mamba, etc.) into an existing environment, it's as simple as:
+
+```bash
+# [!ref] you're already in the environment
+conda install -c conda-forge bioconda::mimick
+```
+
+Then, run the install script provided by Mimick itself, which will install the internally-bundled MimickLinkedReads.jl
+Julia package.
+```bash
+# [!ref] activate environment with mimick
+install_mimick
+```
+
+### Install with pip
+If conda doesn't appeal to you, Mimick can be installed with pip too. To do that, you will need to first
+download [the latest release](https://github.com/pdimens/mimick/releases) (recommended) or clone
+[the git repository](https://github.com/pdimens/mimick):
+
+Download the latest release
+```bash
+# [!ref] (replace x.x.x with the actual version #)
+wget -O mimick.tar.gz https://github.com/pdimens/mimick/releases/download/x.x.x/mimick.x.x.x.tar.gz
+tar -xvzf mimick.tar.gz
+```
+
+Clone the repository
+```bash
+git clone https://github.com/pdimens/mimick.git
+```
+
+Then, you will need to enter the Mimick directory and do a local `pip` installation:
+```bash
+cd mimick
+pip install .
+```
+
+Then, run the install script provided by Mimick itself, which will install the internally-bundled MimickLinkedReads.jl
+Julia package.
+```bash
+# [!ref] activate environment with mimick
+install_mimick
+```
