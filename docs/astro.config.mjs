@@ -14,7 +14,12 @@ export default defineConfig({
       title: '3.1',
       logo: { src: '/src/assets/mimick_logo.png'},
       favicon: '/favicon.png',
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/BLinkseq/mimick' }],
+      social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/BLinkseq/mimick' }],
+      lastUpdated: true,
+      pagination: false,
+      editLink: {
+        baseUrl: 'https://github.com/blinkseq/mimick/edit/main/docs/',
+      },
       sidebar: [
         { slug: 'install' },
         { slug: 'usage' },
