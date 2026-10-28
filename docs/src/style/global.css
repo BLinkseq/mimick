@@ -6,6 +6,11 @@
   box-shadow: 0 1px 6px rgb(0 0 0 / 0.2); /* light drop shadow */
 }
 
+@media (min-width: 72rem) {
+  :root {
+    --sl-content-width: calc(100vw - 2 * var(--sl-sidebar-width) - 6rem);
+  }
+}
 
 .sidebar-pane a[aria-current="page"] {
     background: linear-gradient(40deg, #d59450ff, #7c377c);
