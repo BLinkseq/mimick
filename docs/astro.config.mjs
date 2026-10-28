@@ -11,8 +11,8 @@ export default defineConfig({
 	integrations: [
     starlight({
       customCss: ['./src/style/global.css'],
-      title: '3.1',
-      logo: { src: '/src/assets/mimick_logo.png'},
+      title: 'Mimick',
+      logo: { src: '/src/assets/mimick_logo.png', replacesTitle: true },
       favicon: '/favicon.png',
       social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/BLinkseq/mimick' }],
       lastUpdated: true,
@@ -29,8 +29,9 @@ export default defineConfig({
       plugins: [
         codeblocks(),
         starlightUiTweaks({
-        navbarLinks: [
-           { label: "BLink-seq", href: "https://blinkseq.github.io"},
+          navbarLinks: [
+            { label : 'Version: 3.1', href: "javascript:void(0);"},
+            { label: "BLink-seq", href: "https://blinkseq.github.io"},
         ],
       }),
         starlightScrollToTop({
